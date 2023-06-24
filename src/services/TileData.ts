@@ -1,9 +1,11 @@
+import { chunk, update } from "~/utils/array";
 import ColorId from "./ColorId";
+import { addBitsByWeight, toHex } from "~/utils/hex";
 
 export default class TileData {
   private static TILE_SIZE = 8;
 
-  private constructor(private readonly pixels: ColorId[]) {}
+  private constructor(private readonly pixels: readonly ColorId[]) {}
 
   public static from(colorId: ColorId) {
     return new TileData(
@@ -13,32 +15,21 @@ export default class TileData {
 
   public incrementPixelColorId(i: number, j: number) {
     const index = i * TileData.TILE_SIZE + j;
+    const newPixels = update(this.pixels, index, this.pixels[index].next());
 
-    const newValue = [...this.pixels];
-    newValue[index] = newValue[index].next();
-
-    return new TileData(newValue);
+    return new TileData(newPixels);
   }
 
   public get rows() {
-    return Array.from({ length: TileData.TILE_SIZE }, (v, i) =>
-      this.pixels.slice(i * TileData.TILE_SIZE, (i + 1) * TileData.TILE_SIZE)
-    );
+    return chunk(this.pixels, TileData.TILE_SIZE);
   }
 
   public get gb() {
     const binPixels = this.pixels.map((v) => v.bin);
-    const rows = Array.from({ length: TileData.TILE_SIZE }, (v, i) =>
-      binPixels.slice(i * TileData.TILE_SIZE, (i + 1) * TileData.TILE_SIZE)
-    );
+    const rows = chunk(binPixels, TileData.TILE_SIZE);
     const hex = rows
-      .map((v) => v.reduce(([l, h], [hc, lc]) => [2 * l + lc, 2 * h + hc]))
-      .map(
-        ([h, l]) =>
-          `$${("0" + h.toString(16)).slice(-2)} $${("0" + l.toString(16)).slice(
-            -2
-          )}`
-      )
+      .map(addBitsByWeight)
+      .map((v) => v.map(toHex).join(" "))
       .join(" ");
     return hex;
   }

@@ -1,3 +1,5 @@
+import { Bin } from "~/utils/hex";
+
 type ColorIdValue = 0 | 1 | 2 | 3;
 
 export default class ColorId {
@@ -25,7 +27,7 @@ export default class ColorId {
     }
   }
 
-  public get bin() {
+  public get bin(): [Bin, Bin] {
     switch (this.colorId) {
       case 0:
         return [0b0, 0b0];
