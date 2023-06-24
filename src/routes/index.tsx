@@ -1,4 +1,5 @@
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
+import { useSearchParams } from "solid-start";
 import { styled } from "solid-styled-components";
 import Hex from "~/components/Hex";
 import Tile from "~/components/Tile";
@@ -7,7 +8,17 @@ import TileData from "~/services/TileData";
 import { DARK, LIGHT } from "~/styles";
 
 export default function Home() {
-  const [tile, setTile] = createSignal(TileData.fromDefault(ColorId[0]));
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [tile, setTile] = createSignal(
+    searchParams.query
+      ? TileData.fromHex(searchParams.query)
+      : TileData.fromDefault(ColorId[0])
+  );
+
+  createEffect(() => {
+    setSearchParams({ query: tile().hex });
+  });
 
   const nextColorIdForTile = (i: number, j: number) => {
     setTile(tile().incrementPixelColorId(i, j));
