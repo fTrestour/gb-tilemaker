@@ -31,7 +31,11 @@ export default function Home() {
     <Wrapper>
       <Header>
         <H1>GB TILEMAKER</H1>
-        <p>An online tool to visualize and edit GameBoy tile data.</p>
+        <p>
+          An online tool to visualize and edit GameBoy tile data. Documentation
+          for this data format can be found{" "}
+          <A href="https://gbdev.io/pandocs/Tile_Data.html">here</A>.
+        </p>
       </Header>
       <StyledTile data={tile()} nextColorIdForTile={nextColorIdForTile} />
       <StyledHex value={tile().hex} setHex={setHex} />
@@ -91,4 +95,16 @@ const StyledTile = styled(Tile)`
 const StyledHex = styled(Hex)`
   margin-top: 50px;
   margin-bottom: auto;
+`;
+
+const A = styled("a")`
+  all: unset;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: ${DARK};
+    background-color: ${LIGHT};
+    text-decoration: none;
+  }
 `;

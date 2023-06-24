@@ -34,6 +34,7 @@ export default CopyButton;
 
 const Wrapper = styled("button")`
   all: unset;
+  cursor: pointer;
   padding: 0 20px;
   font-size: 20px;
   border: 2px solid ${LIGHT};

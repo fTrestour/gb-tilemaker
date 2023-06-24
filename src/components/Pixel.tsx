@@ -10,6 +10,7 @@ const Pixel: Component<{ colorId: ColorId; nextColorId: () => void }> = (
 export default Pixel;
 
 const Button = styled("button")<{ colorId: ColorId }>`
+  cursor: pointer;
   background: ${(props) => props.colorId.color};
   box-sizing: border-box;
   border: none;
