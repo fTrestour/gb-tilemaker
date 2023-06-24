@@ -13,8 +13,11 @@ import {
 } from "solid-start";
 import { styled } from "solid-styled-components";
 import { DARK, LIGHT, importFonts } from "./styles";
+import { inject } from "@vercel/analytics";
 
 export default function Root() {
+  inject();
+
   return (
     <Html lang="en">
       <Head>
