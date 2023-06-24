@@ -1,6 +1,7 @@
 import { Component } from "solid-js";
 import { styled } from "solid-styled-components";
-import { LIGHT } from "~/styles";
+import { DARK, LIGHT } from "~/styles";
+import CopyButton from "./CopyButton";
 
 const Hex: Component<{
   value: string;
@@ -15,12 +16,15 @@ const Hex: Component<{
           props.setHex(target.value);
         }}
       />
+      <CopyButton value={props.value} />
     </Wrapper>
   );
 };
 export default Hex;
 
-const Wrapper = styled("div")``;
+const Wrapper = styled("div")`
+  display: flex;
+`;
 
 const TextArea = styled("textarea")`
   all: unset;
