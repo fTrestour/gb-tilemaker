@@ -1,3 +1,4 @@
+import { LIGHT } from "~/styles";
 import { Bin } from "~/utils/hex";
 
 type ColorIdValue = 0 | 1 | 2 | 3;
@@ -17,13 +18,25 @@ export default class ColorId {
   public get color() {
     switch (this.colorId) {
       case 0:
-        return "white";
+        return LIGHT;
       case 1:
-        return "lightGrey";
+        return `repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          ${LIGHT} 2px,
+          ${LIGHT} 8px
+        )`;
       case 2:
-        return "darkGrey";
+        return `repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          ${LIGHT} 2px,
+          ${LIGHT} 4px
+        )`;
       case 3:
-        return "black";
+        return "transparent";
     }
   }
 

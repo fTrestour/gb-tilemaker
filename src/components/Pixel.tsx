@@ -1,20 +1,21 @@
 import { Component, createSignal } from "solid-js";
-import { css } from "solid-styled";
+import { css, styled } from "solid-styled-components";
 import ColorId from "~/services/ColorId";
+import { DARK } from "~/styles";
 
 const Pixel: Component<{ colorId: ColorId; nextColorId: () => void }> = (
   props
-) => {
-  css`
-    button {
-      background-color: ${props.colorId.color};
-      box-sizing: border-box;
-      border: 2px solid black;
-      outline: none;
-    }
-  `;
-
-  return <button onClick={props.nextColorId} />;
-};
+) => <Button colorId={props.colorId} onClick={props.nextColorId} />;
 
 export default Pixel;
+
+const Button = styled("button")<{ colorId: ColorId }>`
+  background: ${(props) => props.colorId.color};
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+
+  &:hover {
+    border: 2px solid ${DARK};
+  }
+`;
