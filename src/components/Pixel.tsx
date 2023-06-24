@@ -1,5 +1,5 @@
-import { Component, createSignal } from "solid-js";
-import { css, styled } from "solid-styled-components";
+import { Component } from "solid-js";
+import { styled } from "solid-styled-components";
 import ColorId from "~/services/ColorId";
 import { DARK } from "~/styles";
 

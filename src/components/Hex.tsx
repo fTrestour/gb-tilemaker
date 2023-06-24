@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
 import { styled } from "solid-styled-components";
-import { DARK, LIGHT } from "~/styles";
+import { LIGHT } from "~/styles";
 import CopyButton from "./CopyButton";
 
 const Hex: Component<{
