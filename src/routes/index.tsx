@@ -7,10 +7,13 @@ import TileData from "~/services/TileData";
 import { DARK, LIGHT } from "~/styles";
 
 export default function Home() {
-  const [tile, setTile] = createSignal(TileData.from(ColorId[0]));
+  const [tile, setTile] = createSignal(TileData.fromDefault(ColorId[0]));
 
   const nextColorIdForTile = (i: number, j: number) => {
     setTile(tile().incrementPixelColorId(i, j));
+  };
+  const setHex = (hex: string) => {
+    setTile(TileData.fromHex(hex));
   };
 
   return (
@@ -20,7 +23,7 @@ export default function Home() {
         <p>An online tool to visualize and edit GameBoy tile data.</p>
       </Header>
       <StyledTile data={tile()} nextColorIdForTile={nextColorIdForTile} />
-      <StyledHex value={tile().gb} />
+      <StyledHex value={tile().hex} setHex={setHex} />
     </Wrapper>
   );
 }

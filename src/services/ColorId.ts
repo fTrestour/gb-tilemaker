@@ -6,6 +6,21 @@ type ColorIdValue = 0 | 1 | 2 | 3;
 export default class ColorId {
   private constructor(private readonly colorId: ColorIdValue) {}
 
+  public static from(n: number) {
+    switch (n) {
+      case 0:
+        return ColorId[0];
+      case 1:
+        return ColorId[1];
+      case 2:
+        return ColorId[2];
+      case 3:
+        return ColorId[3];
+      default:
+        throw new Error("Invalid color id");
+    }
+  }
+
   public static 0 = new ColorId(0);
   public static 1 = new ColorId(1);
   public static 2 = new ColorId(2);
